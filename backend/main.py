@@ -4,6 +4,8 @@ from . import models, database
 from typing import List, Dict
 from datetime import datetime
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 models.Base.metadata.create_all(bind=database.engine)
 
@@ -15,6 +17,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Serve the frontend files
+app.mount("/assets", StaticFiles(directory="frontend"), name="static")
+
+@app.get("/")
+def read_root():
+    return FileResponse("frontend/index.html")
+
 
 device_history = {}
 active_alerts = []
