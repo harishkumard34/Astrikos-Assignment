@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fleet Monitoring Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Fleet Monitor <span>Live</span></h1>
+            <div class="status-indicator">
+                <span class="dot pulse"></span>
+                System Active
+            </div>
+        </header>
+
+        <main>
+            <section class="devices-section">
+                <h2>Connected Devices</h2>
+                <div id="devices-grid" class="grid">
+                    <!-- Device cards will be injected here via JS -->
+                </div>
+            </section>
+
+            <aside class="alerts-section">
+                <h2>Alert Log</h2>
+                <div id="alerts-list" class="alerts-list">
+                    <!-- Alerts will be injected here -->
+                    <div class="empty-state">No active alerts. System healthy.</div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
