@@ -31,6 +31,7 @@ function renderDashboard(data) {
     for (const [deviceId, metrics] of Object.entries(data.devices)) {
         const card = document.createElement("div");
         card.className = "device-card";
+        card.id = `device-${deviceId}`;
         
         // Determine card color based on alerts
         if (alertsByDevice[deviceId]) {
@@ -81,7 +82,7 @@ function renderDashboard(data) {
             const animStyle = isNew ? '' : 'style="animation: none;"';
             
             newHtml += `
-                <div class="alert-item ${alertClass}" ${animStyle}>
+                <div class="alert-item ${alertClass}" ${animStyle} onclick="highlightDevice('${alert.device_id}')">
                     <div class="alert-header">
                         <span>${alert.device_id} • ${alert.metric}</span>
                         <span>${timeStr}</span>
@@ -103,3 +104,14 @@ function renderDashboard(data) {
 // Poll every 1 second
 setInterval(fetchStatus, 1000);
 fetchStatus(); // initial fetch
+
+window.highlightDevice = function(deviceId) {
+    const card = document.getElementById(`device-${deviceId}`);
+    if (card) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        card.classList.add('highlight-pulse');
+        setTimeout(() => {
+            card.classList.remove('highlight-pulse');
+        }, 2000);
+    }
+};
