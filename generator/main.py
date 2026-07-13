@@ -2,10 +2,12 @@ import time
 import random
 import json
 import threading
+import os
 from datetime import datetime, timezone
 import requests
 
-BACKEND_URL = "http://127.0.0.1:8000/ingest"
+PORT = os.getenv("PORT", "8000")
+BACKEND_URL = f"http://127.0.0.1:{PORT}/ingest"
 
 # Device configuration
 DEVICES = [
